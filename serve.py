@@ -14,7 +14,7 @@ admin_db.system_start()
 if __name__ == '__main__':
     try:
         cfg = ConfigParser()
-        cfg.read('serve_config.ini')
+        cfg.read('config.ini')
         md_port = cfg.getint('serve', 'md_port')
         td_port = cfg.getint('serve', 'td_port')
         http_port = cfg.getint('serve', 'http_port')
