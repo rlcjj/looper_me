@@ -9,10 +9,10 @@ class MotorClient:
 
     def __init__(self, collection_name=None):
         if collection_name:
-            self.collection = self.db[collection_name]
+            self.use_collection(collection_name)
 
     def use_collection(self, collection_name):
-        self.collection = collection_name
+        self.collection = self.db[collection_name]
 
     async def insert_one(self, data: dict):
         result = await self.collection.insert_one(data)
