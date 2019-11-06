@@ -25,6 +25,7 @@ ctpbee 使用的数据服务器
 - 安装依赖
   ```
   pip install -r requirement
+  #可采用国内镜像源快速安装 -i https://pypi.douban.com/simple
   如jwt报错 请手动:pip install PyJWT
   ```
 ## 启动服务端
