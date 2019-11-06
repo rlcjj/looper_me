@@ -5,7 +5,7 @@ data views ----->
 from datetime import datetime
 
 from application.views import BaseHandle
-from application.common import true_return, false_return, echo
+from application.common import true_return, false_return, log
 from application.tcp_server.mongo import MotorClient
 from application.views.auth import coroutine_auth_required
 
@@ -71,7 +71,7 @@ class DownloadFileHandler(BaseHandle):
             return
         filename = '{}{}.csv'.format(filename, code[0] if len(code) == 1 else 'Many')
 
-        echo(type(code), code)
+        log.info(type(code), code)
 
         """ 过滤查询 """
         results = await filter(code, start, end, download=True)

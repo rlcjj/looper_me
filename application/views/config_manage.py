@@ -4,7 +4,7 @@ config views ----->
 """
 from application.model import config_db
 from application.views import BaseHandle
-from application.common import true_return, echo
+from application.common import true_return
 import tornado.options
 
 from application.views.auth import auth_required

@@ -3,7 +3,7 @@ from configparser import ConfigParser
 from tornado.ioloop import IOLoop
 
 from application import make_app
-from application.common import echo
+from application.common import log
 from application.tcp_server import md_server, trade_server
 
 from application.model import config_db, admin_db
@@ -24,10 +24,10 @@ if __name__ == '__main__':
         trade_server.start()
         app = make_app()
         app.listen(http_port)
-        echo(
+        log.info(
             f"""\n '数据服务器成功启动^_^ : \n   行情服务器地址---------> tcp://127.0.0.1:{md_port}\n   交易服务器地址---------> tcp://127.0.0.1:{td_port}  # 暂未启用\n   http服务器-------------> http://127.0.0.1:{http_port}
         '""", category="INFO")
 
     except Exception as e:
-        echo('启动失败, 请检查端口是否被占用', category='ERROR')
+        log.error('启动失败, 请检查端口是否被占用', category='ERROR')
     IOLoop.instance().start()

@@ -5,7 +5,7 @@ blacklist views ----->
 from application.model import blacklist_db
 from application.views import BaseHandle
 from application.tcp_server import md_server
-from application.common import true_return, false_return, echo
+from application.common import true_return, false_return, log
 from application.views.auth import auth_required
 
 
@@ -22,7 +22,7 @@ class BlacklistHandler(BaseHandle):
         ip = self.get_argument('ip', None)
         todo = self.get_argument('todo', None)
         if not ip or not todo: return
-        echo(todo, ip)
+        log.info(todo, ip)
 
         if todo == 'alive':
             if ip in md_server.blacklist:

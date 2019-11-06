@@ -5,7 +5,7 @@ origin_manage views ----->
 from application.model import blacklist_db
 from application.views import BaseHandle
 from application.tcp_server import md_server
-from application.common import true_return, false_return, echo
+from application.common import true_return, false_return, log
 from application.views.auth import auth_required
 
 
@@ -22,7 +22,7 @@ class OriginHandler(BaseHandle):
         ip = self.get_argument('ip', None)
         todo = self.get_argument('todo', None)
         if not ip or not todo: return
-        echo(todo, ip)
+        log.info(todo, ip)
 
         if ip in md_server.global_connection:
             md_server.global_connection.pop(ip).close()  # 断开连接

@@ -5,7 +5,7 @@ import time
 import jwt
 from application.global_variable import JWT_SECRET_KEY
 from application.model import admin_db, session
-from application.common import true_return, false_return, echo
+from application.common import true_return, false_return, log
 
 
 class Auth:
@@ -38,7 +38,7 @@ class Auth:
                 algorithm='HS256'
             )
         except Exception as e:
-            echo(e, flag='ERROR')
+            log.error(e)
             return e
 
     @staticmethod
@@ -127,11 +127,11 @@ def auth_required(view_func):
     def wrapper(self):
         result = Auth.identify(self.request)
         if result['success'] and result['data']:
-            echo("Token验证成功", flag='SUCCESS')
+            log.success("Token验证成功")
             self.current_user = result['data']
             view_func(self)
         else:
-            echo("Token验证失败: " + result['msg'], flag='ERROR')
+            log.error("Token验证失败: " + result['msg'])
             result.update({"token": False})
             self.write(result)
 
@@ -149,11 +149,11 @@ def coroutine_auth_required(view_func):
     async def wrapper(self):
         result = Auth.identify(self.request)
         if result['success'] and result['data']:
-            echo("Token验证成功", flag='SUCCESS')
+            log.success("Token验证成功")
             self.current_user = result['data']
             await view_func(self)
         else:
-            echo("Token验证失败: " + result['msg'], flag='ERROR')
+            log.error("Token验证失败: " + result['msg'])
             self.set_status(302)
             self.finish()
 

@@ -2,7 +2,7 @@ import asyncio
 import json
 
 from ctpbee import loads
-from application.common import echo
+from application.common import log
 from application.model import blacklist_db
 from application.tcp_server.buffer import Buffer
 from application.tcp_server.constant import REPLY, REQ_TYPE, REQ_SUB, REQ_DATA, REQ_TICK
@@ -39,7 +39,7 @@ class MarketServer(CoreServer):
             stream.close()
             return
         self.global_connection[s] = stream
-        echo(f'{address} connected!', falg='INFO')
+        log.info(f'{address} connected!')
 
     def connection_lost(self, address: tuple, exception):
         pass
