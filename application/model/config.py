@@ -12,14 +12,14 @@ class Config(Base):
     auth_required = Column(Integer, default=AUTH_REQUIRED)
     origin_number = Column(Integer, default=ORIGIN_NUMBER)
 
-    col = ['key', 'auth_required', 'origin_number']
+    col = {'key': KEY, 'auth_required': AUTH_REQUIRED, 'origin_number': ORIGIN_NUMBER}
 
     @classmethod
     def load_config(cls):
         res = session.query(cls).first()
         data = {}
-        for l in cls.col:
-            data[l] = getattr(res, l)
+        for k, v in cls.col.items():
+            data[k] = getattr(res, k) if hasattr(res, k) else v
         return data
 
     @classmethod
