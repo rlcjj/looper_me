@@ -11,8 +11,9 @@ class Blacklist(Base):
     def load_ip(cls):
         res = session.query(cls).all()
         data = set()
-        for i in res:
-            data.add(i.ip)
+        if res:
+            for i in res:
+                data.add(i.ip)
         return data
 
     @classmethod

@@ -7,7 +7,6 @@ from application.model import blacklist_db
 from application.tcp_server.buffer import Buffer
 from application.tcp_server.constant import REPLY, REQ_TYPE, REQ_SUB, REQ_DATA, REQ_TICK
 from application.tcp_server.fancy import CoreServer
-from application.logger import logger
 
 
 class MarketServer(CoreServer):
